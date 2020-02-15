@@ -9,49 +9,29 @@ public class Music {
     }
 
     public Integer selection(Integer startIndex, String selection){
+        int startIndexBackward = startIndex;
         Integer forward = 0;
         Integer backward = 0;
-        boolean foundForward = false;
-        boolean foundBackward = false;
-        for (int index = startIndex; index < playList.length; index++) {
-            if (selection != playList[index]) {
+        while (!playList[startIndex].equals(selection)){
+            if (startIndex == playList.length - 1){
+                startIndex = 0;
                 forward++;
-            } else {
-                foundForward = true;
-                break;
+            }
+            else {
+                startIndex++;
+                forward++;
             }
         }
-        if (!foundForward) {
-            for (int index = 0; index < playList.length; index++) {
-                if (selection != playList[index]){
-                    forward++;
-                }
-                else {
-                    break;
-                }
-            }
-        }
-        for (int index = startIndex; index > -1; index--) {
-            if (selection != playList[index]) {
+        while (!playList[startIndexBackward].equals(selection)){
+            if (startIndexBackward == 0){
+                startIndexBackward = playList.length - 1;
                 backward++;
-            } else {
-                foundBackward = true;
-                break;
+            }
+            else {
+                startIndexBackward--;
+                backward++;
             }
         }
-        if (!foundBackward) {
-            for (int index = playList.length - 1; index > -1; index--) {
-                if (selection != playList[index]){
-                    backward++;
-                }
-                else {
-                    break;
-                }
-            }
-        }
-        if (forward < backward){
-            return forward;
-        }
-        return backward;
+        return (forward < backward) ? forward : backward;
     }
 }
