@@ -13,23 +13,17 @@ public class Music {
         Integer forward = 0;
         Integer backward = 0;
         while (!playList[startIndex].equals(selection)){
-            if (startIndex == playList.length - 1){
+            startIndex++;
+            forward++;
+            if (startIndex >= playList.length){
                 startIndex = 0;
-                forward++;
-            }
-            else {
-                startIndex++;
-                forward++;
             }
         }
         while (!playList[startIndexBackward].equals(selection)){
-            if (startIndexBackward == 0){
+            startIndexBackward--;
+            backward++;
+            if (startIndexBackward < 0){
                 startIndexBackward = playList.length - 1;
-                backward++;
-            }
-            else {
-                startIndexBackward--;
-                backward++;
             }
         }
         return (forward < backward) ? forward : backward;
